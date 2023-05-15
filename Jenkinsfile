@@ -2,6 +2,7 @@ pipeline{
     agent any
      tools{
         maven 'maven'
+
      }
     stages{
         
@@ -40,7 +41,7 @@ pipeline{
         stage(" Static Code Analysis"){
             
             steps{
-                withSonarQubeEnv(credentialsId: 'sonar') {
+                withSonarQubeEnv(installationName: 'sonarqube', credentialsId: 'sonar') {
                 sh 'mvn clean package sonar:sonar'
                 }
             }
