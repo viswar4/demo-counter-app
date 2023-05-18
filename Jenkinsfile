@@ -2,8 +2,8 @@ pipeline{
     agent any
      tools{
         maven 'maven'
-
-     }
+          }
+    
     stages{
         
         stage(" Git Checkout"){
@@ -47,5 +47,17 @@ pipeline{
             }
             
             }
+        
+        stage(" Quality Gate Status "){
+            
+            steps{
+                
+                scripts{
+
+                    waitForQualityGate abortPipeline: true, credentialsId: 'sonar'
+                }
+                }
+            }
+            
+            }
         }
-    }
