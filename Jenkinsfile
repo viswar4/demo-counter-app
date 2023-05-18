@@ -52,7 +52,7 @@ pipeline{
             
             steps{
                 
-                scripts{
+                script{
 
                     waitForQualityGate abortPipeline: true, credentialsId: 'sonar'
                 }
