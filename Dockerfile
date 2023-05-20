@@ -3,7 +3,7 @@ WORKDIR /app
 COPY . /app/
 RUN mvn install
 
-FROM openjdk:21-jdk-slim-buster
+FROM adoptopenjdk/openjdk11:alpine
 WORKDIR /demo
 COPY --from=build /app/target/Uber.jar /demo/
 EXPOSE 9091
