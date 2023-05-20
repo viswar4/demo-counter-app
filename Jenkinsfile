@@ -103,8 +103,9 @@ pipeline{
             steps{
 
                 script{
-                    
-                    sh 'echo $DOCKERHUB_CREDS_PSW | docker login -u viswar4 --password-stdin'
+
+                    withCredentials([usernameColonPassword(credentialsId: 'dockerhub', variable: 'docker')]) {
+                    sh 'docker login -u viswar4 -p ${docker}'
                     sh 'docker image push viswar4/${JOB_NAME}:v1.$BUILD_ID'
                     }
                 }
