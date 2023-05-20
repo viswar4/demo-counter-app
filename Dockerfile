@@ -6,5 +6,5 @@ RUN mvn install
 FROM adoptopenjdk/openjdk11:alpine
 WORKDIR /demo
 COPY --from=build /app/target/Uber.jar /demo/
-EXPOSE 9091
+EXPOSE 9090
 CMD ["java", "-jar", "Uber.jar"]

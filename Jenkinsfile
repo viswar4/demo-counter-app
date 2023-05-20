@@ -3,6 +3,10 @@ pipeline{
      tools{
         maven 'maven'
           }
+    environment{
+        DOCKERHUB_USERNAME = "viswar4"
+        DOCKERHUB_CREDS = 'dockerhub'
+    }
     
     stages{
         
@@ -91,7 +95,21 @@ pipeline{
                     sh "docker image tag ${JOB_NAME}:v1.$BUILD_ID viswar4/${JOB_NAME}:v1.$BUILD_ID"
                     sh "docker image tag ${JOB_NAME}:v1.$BUILD_ID viswar4/$JOB_NAME:latest"
                 }
-            }        }
-}
+            }        
+            }
+
+            stage("Push Docker Image to Dockerhub"){
+            
+            steps{
+
+                script{
+                    
+                    sh 'echo $DOCKERHUB_CREDS_PSW | docker login -u viswar4 --password-stdin'
+                    sh 'docker image push viswar4/${JOB_NAME}:v1.$BUILD_ID'
+                    }
+                }
+                
+                }
+            }
 }
 
