@@ -104,8 +104,8 @@ pipeline{
 
                 script{
 
-                    withCredentials([usernameColonPassword(credentialsId: 'dockerhub', variable: 'docker')]) {
-                    sh 'docker login -u viswar4 -p ${docker}'
+                   withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'dockerhub', usernameVariable: 'username')]) {
+                    sh 'docker login -u viswar4 -p ${dockerhub}'
                     sh 'docker image push viswar4/${JOB_NAME}:v1.$BUILD_ID'
                     }
                 }
